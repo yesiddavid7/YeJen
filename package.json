@@ -1,0 +1,24 @@
+{
+  "name": "yejen",
+  "version": "1.0.0",
+  "description": "Tienda Virtual",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yesiddavid7/YeJen.git"
+  },
+  "author": "YeJen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yesiddavid7/YeJen/issues"
+  },
+  "homepage": "https://github.com/yesiddavid7/YeJen#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.6"
+  }
+}
