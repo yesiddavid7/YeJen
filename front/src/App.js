@@ -1,11 +1,13 @@
 import './App.css';
 import React from 'react';
+import Header from './components/layout/Header';
+import { Footer } from './components/layout/Footer';
 
 function App() {
   return (
     <div className="App">
-      <h1> Tienda Virtual YeJen</h1>
-      <img src='./images/logo.png' className='imageApp'/>
+      <Header/>
+      <Footer/>
     </div>
   );
 }
