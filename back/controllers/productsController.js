@@ -1,4 +1,4 @@
-const { restart } = require("nodemon");
+//const { restart } = require("nodemon");
 const producto = require("../models/productos")
 const fetch =(url) => import('node-fetch').then(({default:fetch}) => fetch(url));
 

@@ -41,7 +41,7 @@ const tablaProductos = mongoose.Schema({
                 "Perfumeria",
                 "Maquillaje",
                 "Cuidado Facial",
-                "Cuidado Diarios",
+                "Cuidado Diario",
                 "Bebes",
                 "Niños",
                 "Hombres"

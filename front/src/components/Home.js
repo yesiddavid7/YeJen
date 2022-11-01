@@ -15,15 +15,11 @@ const Home = () => {
             return alert.error(error)
         }
         dispatch(getProducts());
-        alert.success("OK")
+        //alert.success("OK")
     }, [dispatch])
     return (
         <Fragment>
-            {loading ? 
-                <Fragment>
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                    <span class="sr-only">Cargando...</span>
-                </Fragment>: (
+            {loading ? <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>: (
                 <Fragment>
                     <MetaData title="Bienvenidos"></MetaData>
                     <h1 id="Encabezado">Ultimos Productos</h1>

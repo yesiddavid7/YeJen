@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import '../../App.css'
 
 const Header = () => {
   return (
@@ -6,7 +7,7 @@ const Header = () => {
         <nav className='navbar row'>
             <div className='col-12 col-md-3'>
                 <div className='navbar-brand'>
-                    <img className='image-logo' src="./images/logo.png" alt="YeJen Logo"></img>
+                    <img className='image-logo' src="./logo_YeJen.png" alt="YeJen Logo"/>
                 </div>
             </div>
             <div className='col-12 col-md-6 mt-2 mt-md-0'>
