@@ -12,6 +12,29 @@ export const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const [quantity, setQuantity] = useState(1);
+  const consumir = 
+  {
+    "_id": "6359bce4372b9abf2ed43bbb",
+    "nombre": "Naturé Jugando en los Árboles",
+    "precio": 38400,
+    "descripcion": "Naturé Colonia jugando en los Árbores es una invitación para sentir la divertida sensación de jugar en árbol, con aquel delicioso olorcito que mezcla el fresco cítrico de las frutas cambiando con madera y el frescor del romero y la albahaca. Perfecta para jugar, explorar el mundo y ​descobrir los sentidos, sin limitaciones.",
+    "calificacion": 3.9,
+    "imagen": [
+      {
+        "public_id": "productos/dsvbpny402gelwugv2le",
+        "url": "./images/productos/Colonia.png",
+        "_id": "6359bce4372b9abf2ed43bbc"
+      }
+    ],
+    "categoria": "Bebes",
+    "vendedor": "Jenny Martinez",
+    "inventario": 50,
+    "numCalificaciones": 29,
+    "opiniones": [],
+    "fechaCreacion": "2022-10-26T23:04:04.726Z",
+    "__v": 0
+  };
+
 
   useEffect(() => {
     if (error){
