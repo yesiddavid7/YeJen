@@ -5,12 +5,13 @@ const tablaProductos = mongoose.Schema({
         type: String,
         required: [true,"Por favor registra el nombre del producto"],
         trim: true,
-        maxLenght: [120, "El nombre del producto no debe exceder los 120 caracteres"]
+        maxLength: [120, "El nombre del producto no debe exceder 120 caracteres"]
     },
     precio:{
         type: Number,
         required: [true,"Por favor registra el precio del producto"],
-        maxLenght: [8, "El precio del producto no puede estar por encima del 99'999.999"],
+        max: [99999999, "El precio no puede estar por encima de 99'999.999"],
+        min: [0, "El precio no puede ser negativo"],
         default: 0.0
     },
     descripcion:{
@@ -45,7 +46,8 @@ const tablaProductos = mongoose.Schema({
                 "Bebes",
                 "Niños",
                 "Hombres"
-            ]
+            ],
+            message: 'Categoria no válida'
         }
     },
     vendedor:{
@@ -55,7 +57,8 @@ const tablaProductos = mongoose.Schema({
     inventario:{
         type: Number,
         required: [true,"Por favor registre el stock del producto"],
-        maxLenght: [5, "la cantidad maxima del producto no puede estar por encima del 99999"],
+        max: [99999, "La cantidad no puede estar por encima de 99999"],
+        min: [0, "La cantidad no puede ser negativa"],
         default: 0
     },
     numCalificaciones:{
@@ -70,7 +73,9 @@ const tablaProductos = mongoose.Schema({
             },
             rating:{
                 type: Number,
-                required: true
+                required: true,
+                min: [0, 'El rating no puede ser negativo'],
+                max: [5, 'El rating no puede ser mayor a 5']
             },
             comentario:{
                 type: String,
