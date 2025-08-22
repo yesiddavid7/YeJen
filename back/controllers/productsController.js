@@ -1,91 +1,105 @@
 //const { restart } = require("nodemon");
-const producto = require("../models/productos")
+const Producto = require("../models/productos")
 const fetch =(url) => import('node-fetch').then(({default:fetch}) => fetch(url));
 
 // ver lista de productos
 exports.getProducts = async(req,res,next) => {
-    const productos = await producto.find();
-    if(!productos){
-        return res.status(404).json({
-            success:false,
-            error:true
-        })
+    try {
+        const productos = await Producto.find();
+        return res.status(200).json({
+            success:true,
+            cantidad: productos.length,
+            productos
+        });
+    } catch (error) {
+        next(error);
     }
-    res.status(200).json({
-        success:true,
-        cantidad: productos.length,
-        productos
-    })
 }
 
 // ver un producto por id
 exports.getProductById = async(req,res,next) => {
-    const productId = await producto.findById(req.params.id)
-    if (!productId){
-        return res.status(404).json({
-            success:false,
-            message: "No se encontro el producto",
-            error:true
+    try {
+        const productoEncontrado = await Producto.findById(req.params.id)
+        if (!productoEncontrado){
+            return res.status(404).json({
+                success:false,
+                message: "No se encontro el producto",
+                error:true
+            })
+        }
+        return res.status(200).json({
+            success:true,
+            message: "Aqui se muestra la informacion del producto",
+            producto: productoEncontrado
         })
+    } catch (error) {
+        next(error);
     }
-    res.status(200).json({
-        success:true,
-        message: "Aqui se muestra la informacion del producto",
-        productId
-    })
 }
 
 //Update un producto
 exports.updateProduct = async (req,res,next) => {
-    //Variable de tipo modificable
-    let productId = await producto.findById(req.params.id)
-    //Verifico que el objeto no existe para finalizar el proceso
-    if (!productId){
-        return res.status(404).json({
-            success:false,
-            message: "No se encontro el producto"
+    try {
+        //Variable de tipo modificable
+        let productoActual = await Producto.findById(req.params.id)
+        //Verifico que el objeto no existe para finalizar el proceso
+        if (!productoActual){
+            return res.status(404).json({
+                success:false,
+                message: "No se encontro el producto"
+            })
+        }
+        //Si el objeto si existia, entonces si ejecuto la actualizacion
+        productoActual = await Producto.findByIdAndUpdate(req.params.id, req.body, {
+            // valido solo los atributos nuevos o actualizados
+            new:true,
+            runValidators:true
+        });
+        //Respondo OK si el producto si se actualizo
+        return res.status(200).json({
+            success:true,
+            message: "Producto actualizado Correctamente",
+            producto: productoActual
         })
+    } catch (error) {
+        next(error);
     }
-    //Si el objeto si existia, entonces si ejecuto la actualizacion
-    productId = await producto.findByIdAndUpdate(req.params.id, req.body, {
-        // valido solo los atributos nuevos o actualizados
-        new:true,
-        runValidators:true
-    });
-    //Respondo OK si el producto si se actualizo
-    res.status(200).json({
-        success:true,
-        message: "Producto actualizado Correctamente",
-        productId
-    })
 }
 
 // crear nuevo producto /api/productos
 exports.newProduct= async(req,res,next) => {
-    const product = await producto.create(req.body);
-    res.status(200).json({
-        success:true,
-        product
-    })
+    try {
+        const productoCreado = await Producto.create(req.body);
+        return res.status(201).json({
+            success:true,
+            producto: productoCreado
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
 // Eliminar un producto
 exports.deleteProduct = async (req,res,next) => {
-    //Variable de tipo modificable
-    const productId = await producto.findById(req.params.id)
-    //Verifico que el objeto no existe para finalizar el proceso
-    if (!productId){
-        return res.status(404).json({
-            success:false,
-            message: "No se encontro el producto"
+    try {
+        //Variable de tipo modificable
+        const productoEncontrado = await Producto.findById(req.params.id)
+        //Verifico que el objeto no existe para finalizar el proceso
+        if (!productoEncontrado){
+            return res.status(404).json({
+                success:false,
+                message: "No se encontro el producto"
+            })
+        }
+        // Eliminamos el producto
+        await productoEncontrado.remove();
+        return res.status(200).json({
+            success:true,
+            message: "Producto eliminado Correctamente",
         })
+    } catch (error) {
+        next(error);
     }
-    // Eliminamos el producto
-    await productId.remove();
-    res.status(200).json({
-        success:true,
-        message: "Producto eliminado Correctamente",
-    })
 }
 
 
